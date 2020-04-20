@@ -1,0 +1,3 @@
+MAPPA_USER=guionardo
+MAPPA_PASS=A1GU
+CACHE=sqlite://artifacts/mappa.db
