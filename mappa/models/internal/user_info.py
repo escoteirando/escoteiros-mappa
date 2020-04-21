@@ -3,7 +3,7 @@ from datetime import date
 from base_model import BaseModel
 
 
-class UserInfoModel(BaseModel):    
+class UserInfoModel(BaseModel):
     id: int              # e.codigo
     user_name: str       # e.username
     cod_associado: int   # e.codigoAssociado
@@ -14,7 +14,7 @@ class UserInfoModel(BaseModel):
     sexo: str            # a.sexo
     ativo: bool          # e.ativo (testar contra 'S')
     data_validade: date  # a.dataValidade
-    
+
     cod_grupo: int       # e.codigoGrupo
     cod_regiao: str      # e.codigoRegiao
     nom_grupo: str       # g.nome

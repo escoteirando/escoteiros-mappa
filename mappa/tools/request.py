@@ -1,5 +1,5 @@
 import json
-from time import sleep, time
+from time import sleep
 
 import requests
 
@@ -35,7 +35,8 @@ class HTTP:
             header["Accept-Encoding"] = "gzip"
         return header
 
-    def get(self, url: str, params: dict = None, description: str = None, no_cache: bool = False, max_age: int = 172800) -> HTTPResponse:
+    def get(self, url: str, params: dict = None, description: str = None,
+            no_cache: bool = False, max_age: int = 172800) -> HTTPResponse:
         ''' HTTP GET
 
         :param url:

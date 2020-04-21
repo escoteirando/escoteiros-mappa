@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 from typing import List
 
 from openpyxl import Workbook
@@ -159,7 +159,8 @@ class MAPPAExportService:
             marcacoes = self.get_marcacoes_secao(secao.codigo)
 
             stats = {progressao.codigo: ProgressaoSecao(
-                0, progressao.codigo, progressao.codigoUeb, progressao.descricao)
+                0, progressao.codigo,
+                progressao.codigoUeb, progressao.descricao)
                 for progressao in progressoes}
 
             equipe = self.get_equipe(secao.codigo)
