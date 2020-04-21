@@ -1,6 +1,7 @@
 from typing import List
 
-from base_model import BaseModel, ListBaseModel
+from base_model import BaseModel
+
 from mappa.models.mappa.associado import AssociadoModel
 
 

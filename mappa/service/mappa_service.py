@@ -1,5 +1,4 @@
 import datetime
-import json
 import time
 from typing import List
 
@@ -19,7 +18,7 @@ from mappa.models.mappa.marcacoes import MarcacoesModel
 from mappa.models.mappa.progressao import ProgressaoModel
 from mappa.models.mappa.secao import SecaoModel
 from mappa.models.mappa.subsecao import SubSecaoModel
-from mappa.tools.request import HTTP, HTTPResponse
+from mappa.tools.request import HTTP
 
 
 class MAPPAService:
@@ -40,20 +39,26 @@ class MAPPAService:
         try:
             cache_login = LoginModel(self._cache.get_value(
                 'mappa', 'login_'+username, None))
-        except:
+        except Exception as exc:
+            self._logger.debug(
+                'MAPPAService exception on login: %s',
+                str(exc))
             cache_login = LoginModel()
 
         if cache_login.id and \
                 cache_login.ttl > 0 and \
                 cache_login.userId:
             self._http.set_authorization(
-                cache_login.id, cache_login.created.timestamp()+cache_login.ttl)
+                cache_login.id,
+                cache_login.created.timestamp()+cache_login.ttl)
             self._user_id = cache_login.userId
             self._logger.info('login from cache (%s) valid until (%s)',
-                              username, datetime.datetime.fromtimestamp(cache_login.ttl))
+                              username,
+                              datetime.datetime.fromtimestamp(cache_login.ttl))
             return True
 
-        # Sem informação de login ou autorização expirada - Efetua o request a API mappa
+        # Sem informação de login ou autorização expirada
+        # Efetua o request a API mappa
 
         response = self._http.post(
             url='/api/escotistas/login',
@@ -79,7 +84,7 @@ class MAPPAService:
             value=login_user.to_json(),
             ttl=login_user.ttl
         )
-        
+
         self._http.set_authorization(login_user.id, time.time()+login_user.ttl)
         self._user_id = login_user.userId
         self._logger.info(
@@ -216,7 +221,11 @@ class MAPPAService:
                   {"where":        {
                       "numeroGrupo": None,
                       "codigoRegiao": None,
-                      "codigoCaminho": {"inq": [1, 2, 3, 4, 5, 6, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]}
+                      "codigoCaminho": {
+                          "inq": [1, 2, 3, 4,
+                                  5, 6, 11, 12,
+                                  13, 14, 15, 16,
+                                  17, 18, 19, 20]}
                   }}}
         response = self._http.get(
             '/api/progressao-atividades', params=filter)

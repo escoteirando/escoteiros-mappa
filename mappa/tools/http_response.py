@@ -21,6 +21,8 @@ class HTTPResponse:
         if isinstance(dict_response, dict) and \
             'status_code' in dict_response and \
                 'content' in dict_response:
-            return HTTPResponse(dict_response['status_code'], dict_response['content'])
+            return HTTPResponse(
+                dict_response['status_code'],
+                dict_response['content'])
 
         return None

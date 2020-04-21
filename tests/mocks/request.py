@@ -1,6 +1,6 @@
 import os
 from datetime import datetime
-from json import dumps, loads
+from json import loads
 
 from mappa.tools.request import HTTP, HTTPResponse
 
