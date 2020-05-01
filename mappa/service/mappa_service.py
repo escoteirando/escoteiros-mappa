@@ -92,6 +92,13 @@ class MAPPAService:
             username, valid_until)
         return True
 
+    def is_authorized(self, user_id) -> bool:
+        return self._user_id == user_id and self._http.is_authorized()
+
+    def set_authorization(self, user_id, authorization, auth_valid_until):
+        self._http.set_authorization(authorization, auth_valid_until)
+        self._user_id = user_id
+
     def get_user_info(self, user_id) -> UserInfoModel:
         escotista = self.get_escotista(user_id)
         if not escotista:
