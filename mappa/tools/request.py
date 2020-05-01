@@ -1,5 +1,5 @@
 import json
-from time import sleep
+from time import sleep, time
 
 import requests
 
@@ -16,6 +16,7 @@ class HTTP:
     def __init__(self, cache: CacheGS, gzipped: bool = False):
         self._url = "http://mappa.escoteiros.org.br"
         self._authorization = None
+        self._auth_valid_until = 0
         self.logger = get_logger()
         self._cache = cache
         self._gzipped = gzipped
@@ -25,6 +26,12 @@ class HTTP:
     def set_authorization(self, authorization: str, valid_until: int):
         self._authorization = authorization
         self._auth_valid_until = valid_until
+
+    def is_authorized(self) -> bool:
+        """
+        Returns True if authorization key exists and is valid
+        """
+        return bool(self._authorization and self._auth_valid_until > time())
 
     def auth_header(self):
         header = {
