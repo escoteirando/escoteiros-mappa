@@ -53,9 +53,9 @@ setup(
         "Programming Language :: Python :: 3.8"
     ],
     url='https://github.com/guionardo/escoteiros-mappa',
-    keywords='canaa hbsis',
+    keywords='escoteiros scouts mappa',
     project_urls={
-        "Documentation": "https://github.com/guionardo/escoteiros-mappa/wiji",
+        "Documentation": "https://github.com/guionardo/escoteiros-mappa/wiki",
         "Source": "https://github.com/guionardo/escoteiros-mappa",
     },
     author=_author,
