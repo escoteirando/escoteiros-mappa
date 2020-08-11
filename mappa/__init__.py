@@ -1,4 +1,4 @@
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 __tool_name__ = 'escoteiros-mappa'
 __description__ = 'Integração com API mappa'
 __author__ = 'Guionardo Furlan'
