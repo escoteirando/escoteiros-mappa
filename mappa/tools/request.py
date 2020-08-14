@@ -23,6 +23,10 @@ class HTTP:
         if not cache:
             raise ValueError('cache not informed')
 
+    @property
+    def authorization(self)->str:
+        return self._authorization
+        
     def set_authorization(self, authorization: str, valid_until: int):
         self._authorization = authorization
         self._auth_valid_until = valid_until

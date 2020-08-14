@@ -178,6 +178,16 @@ class MAPPAExportService:
                     associado_por_progressao[marcacao.codigoAtividade] = set()
                 if marcacao.codigoAssociado in cod_associados and\
                         marcacao.codigoAssociado not in associado_por_progressao[marcacao.codigoAtividade]:
+                    if marcacao.codigoAtividade not in stats:
+                        progressao = [
+                            p for p in progressoes if p.codigo == marcacao.codigoAtividade]
+                        if not progressao:
+                            # TODO: Verificar progressão não consta na lista de progressões
+                            continue
+                        stats[marcacao.codigoAtividade] = \
+                            ProgressaoSecao(0, marcacao.codigoAtividade,
+                                            progressao[0].cod_ueb,
+                                            progressao[0].descricao)
                     stats[marcacao.codigoAtividade].conquistas += 1
                     associado_por_progressao[marcacao.codigoAtividade].add(
                         marcacao.codigoAssociado)

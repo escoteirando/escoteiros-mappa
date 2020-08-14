@@ -24,53 +24,55 @@ class UserInfoModel(BaseModel):
     nom_secao: str       # s.nome
     tip_secao: int       # s.codigoTipoSecao
 
+    autorizacao: str            # m.authorization
+    autorizacao_validade: int   # m.auth_valid_until
 
-# Associado
-# {
-#     "codigo": 850829,
-#     "nome": "GUIONARDO FURLAN",
-#     "codigoFoto": null,
-#     "codigoEquipe": null,
-#     "username": 1247937,
-#     "numeroDigito": 3,
-#     "dataNascimento": "Sat Feb 05 1977 00:00:00 GMT+0000 (UTC)",
-#     "dataValidade": "2019-01-01T00:00:00.000Z",
-#     "nomeAbreviado": "",
-#     "sexo": "M",
-#     "codigoRamo": 2,
-#     "codigoCategoria": 5,
-#     "codigoSegundaCategoria": 0,
-#     "codigoTerceiraCategoria": 0,
-#     "linhaFormacao": "Escotista",
-#     "codigoRamoAdulto": 2,
-#     "dataAcompanhamento": null
-# }
+    # Associado
+    # {
+    #     "codigo": 850829,
+    #     "nome": "GUIONARDO FURLAN",
+    #     "codigoFoto": null,
+    #     "codigoEquipe": null,
+    #     "username": 1247937,
+    #     "numeroDigito": 3,
+    #     "dataNascimento": "Sat Feb 05 1977 00:00:00 GMT+0000 (UTC)",
+    #     "dataValidade": "2019-01-01T00:00:00.000Z",
+    #     "nomeAbreviado": "",
+    #     "sexo": "M",
+    #     "codigoRamo": 2,
+    #     "codigoCategoria": 5,
+    #     "codigoSegundaCategoria": 0,
+    #     "codigoTerceiraCategoria": 0,
+    #     "linhaFormacao": "Escotista",
+    #     "codigoRamoAdulto": 2,
+    #     "dataAcompanhamento": null
+    # }
 
-# Escotista
-# {
-#     "codigo": 50442,
-#     "codigoAssociado": 850829,
-#     "username": "Guionardo",
-#     "nomeCompleto": "GuionardoFurlan",
-#     "ativo": "S",
-#     "codigoGrupo": 32,
-#     "codigoRegiao": "SC",
-#     "codigoFoto": null
-# }
+    # Escotista
+    # {
+    #     "codigo": 50442,
+    #     "codigoAssociado": 850829,
+    #     "username": "Guionardo",
+    #     "nomeCompleto": "GuionardoFurlan",
+    #     "ativo": "S",
+    #     "codigoGrupo": 32,
+    #     "codigoRegiao": "SC",
+    #     "codigoFoto": null
+    # }
 
-# Grupo
-# {
-#     "codigo":32,
-#     "codigoRegiao":"SC",
-#     "nome":"LEÕES DE BLUMENAU",
-#     "codigoModalidade":1
-# }
+    # Grupo
+    # {
+    #     "codigo":32,
+    #     "codigoRegiao":"SC",
+    #     "nome":"LEÕES DE BLUMENAU",
+    #     "codigoModalidade":1
+    # }
 
-# Seção
-# {
-#     "codigo": 1424,
-#     "nome": "ALCATÉIA 1",
-#     "codigoTipoSecao": 1,
-#     "codigoGrupo": 32,
-#     "codigoRegiao": "SC"
-# }
+    # Seção
+    # {
+    #     "codigo": 1424,
+    #     "nome": "ALCATÉIA 1",
+    #     "codigoTipoSecao": 1,
+    #     "codigoGrupo": 32,
+    #     "codigoRegiao": "SC"
+    # }

@@ -30,6 +30,18 @@ class MAPPAService:
         self._http = HTTP(self._cache)
         self._user_id = None
 
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @property
+    def authorization(self):
+        return self._http.authorization
+
+    @property
+    def auth_valid_until(self):
+        return 0 if not self.authorization else self._http._auth_valid_until
+
     def login(self, username, password) -> bool:
         """ Gets authorization for username, using cache if available """
 
@@ -99,6 +111,25 @@ class MAPPAService:
         self._http.set_authorization(authorization, auth_valid_until)
         self._user_id = user_id
 
+    def reload_authorization(self, user_name) -> bool:
+        """
+        Reload authorization for user from cache
+        """
+        login_user_json = self.cache.get_value(
+            section='mappa',
+            key='login_'+user_name
+        )
+        if not login_user_json:
+            return False
+
+        login_user = LoginModel(login_user_json)
+        valid_until = login_user.created.timestamp()+login_user.ttl
+        if time.time() > valid_until:
+            return False
+
+        self._http.set_authorization(login_user.id, valid_until)
+        return True
+
     def get_user_info(self, user_id) -> UserInfoModel:
         escotista = self.get_escotista(user_id)
         if not escotista:
@@ -127,6 +158,8 @@ class MAPPAService:
             "cod_regiao": escotista.codigoRegiao,
             "nom_grupo": grupo.nome,
             "cod_modalidade": grupo.codigoModalidade,
+            "autorizacao": self.authorization,
+            "autorizacao_validade": self.auth_valid_until
         }
 
         return UserInfoModel(user_info)
