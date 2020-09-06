@@ -24,8 +24,10 @@ from mappa.tools.request import HTTP
 class MAPPAService:
 
     def __init__(self, cache_string_connection: str = '.cache'):
-
-        self._cache = CacheGS(cache_string_connection)
+        if isinstance(cache_string_connection, CacheGS):
+            self._cache = cache_string_connection
+        else:
+            self._cache = CacheGS(cache_string_connection)
         self._logger = get_logger()
         self._http = HTTP(self._cache)
         self._user_id = None
@@ -130,7 +132,7 @@ class MAPPAService:
         self._http.set_authorization(login_user.id, valid_until)
         return True
 
-    def get_user_info(self, user_id) -> UserInfoModel:
+    def get_user_info(self, user_id, as_dict: bool = False) -> UserInfoModel:
         escotista = self.get_escotista(user_id)
         if not escotista:
             return None
@@ -161,6 +163,9 @@ class MAPPAService:
             "autorizacao": self.authorization,
             "autorizacao_validade": self.auth_valid_until
         }
+
+        if as_dict:
+            return user_info
 
         return UserInfoModel(user_info)
 
@@ -202,7 +207,7 @@ class MAPPAService:
                 "codigoRegiao": cod_regiao
             }
         }}
-        response = self._http.get(f'/api/grupos',
+        response = self._http.get('/api/grupos',
                                   params=filter,
                                   description='Grupo')
         grupo = None
