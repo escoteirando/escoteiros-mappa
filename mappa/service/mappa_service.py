@@ -1,4 +1,5 @@
 import datetime
+import json
 import time
 from typing import List
 
@@ -240,6 +241,19 @@ class MAPPAService:
         equipe = []
         if response.is_ok:
             le = ListBaseModel(SubSecaoModel, response.content)
+            subsecao: SubSecaoModel
+            content = {}
+            for subsecao in le.to_list():
+                if all(subsecao.associados):
+                    continue
+                content = content or json.loads(response.content)
+                assoc = [s.get('associados')
+                         for s in content
+                         if s.get('codigo', 0) == subsecao.codigo]
+                if not assoc:
+                    continue
+                subsecao.associados = [AssociadoModel(ass) for ass in assoc[0]]
+
             equipe = le.to_list()
 
         return equipe

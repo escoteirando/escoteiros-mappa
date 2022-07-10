@@ -132,7 +132,7 @@ class MAPPAExportService:
                             value=associado.dataNascimento)
                     ws.cell(row=linha, column=5).number_format = 'dd/mm/yyyy'
 
-                    anos = (datetime.now(timezone.utc) -
+                    anos = (datetime.now() -
                             associado.dataNascimento).days/365.25
                     meses_restantes = int(
                         120 * (limite_idade_secao[secao.codigoTipoSecao] - anos))/10
