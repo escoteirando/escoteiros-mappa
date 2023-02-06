@@ -84,6 +84,7 @@ class MAPPAExportService:
         progressoes = {}
         tipo_secao = {1: 'A', 2: 'E', 3: 'S', 4: 'P'}
         limite_idade_secao = {1: 11, 2: 15, 3: 18, 4: 21}
+        limite_inferior_idade_secao = {1: 6.5, 2: 11, 3: 15, 4: 18}
         for secao in secoes:
             progressoes = self.get_progressoes_ramo(
                 tipo_secao[secao.codigoTipoSecao])
@@ -106,8 +107,9 @@ class MAPPAExportService:
             ws.cell(1, 4, 'Progressão %')
             ws.cell(1, 5, 'Nascimento')
             ws.cell(1, 6, 'Tempo restante na seção (m)')
+            ws.cell(1, 7, 'Progressão esperada pela idade')
 
-            coluna = 7
+            coluna = 8
             for index, progressao in enumerate(progressoes):
                 ws.cell(1, coluna+index, progressao.codigoUeb)
             linha = 2
@@ -138,6 +140,14 @@ class MAPPAExportService:
                         120 * (limite_idade_secao[secao.codigoTipoSecao] - anos))/10
 
                     ws.cell(row=linha, column=6, value=meses_restantes)
+
+                    tempo_maximo_secao = limite_idade_secao[secao.codigoTipoSecao] - \
+                        limite_inferior_idade_secao[secao.codigoTipoSecao]
+                    tempo_secao = anos - \
+                        limite_inferior_idade_secao[secao.codigoTipoSecao]
+                    progresso_esperado = tempo_secao/tempo_maximo_secao
+                    ws.cell(row=linha, column=7, value=progresso_esperado)
+                    ws.cell(row=linha, column=7).style = 'Percent'
 
                     for index, progressao in enumerate(progressoes):
                         if associado.codigo in marc_assoc and\

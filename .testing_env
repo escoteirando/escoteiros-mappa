@@ -1,5 +1,5 @@
-_MAPPA_USER=guionardo
-_MAPPA_PASS=A1GU
+MAPPA_USER=guionardo
+MAPPA_PASS=A1GU
 CACHE=path://artifacts/mappa
-MAPPA_USER=MauricioT2
-MAPPA_PASS=T2MA
+_MAPPA_USER=MauricioT2
+_MAPPA_PASS=T2MA
