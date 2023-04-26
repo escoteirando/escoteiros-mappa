@@ -18,6 +18,7 @@ class TestExportXLSX(unittest.TestCase):
         self.svc.login(self.username, self.password)
         self.esvc = MAPPAExportService(self.svc)
 
-    def test_exporta_progressoes(self):
+    def test_exporta_progressoes(self):        
         wb = self.esvc.export_all('A')
+        
         wb.save('artifacts//test.xlsx')

@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime
 from typing import List
 
 from openpyxl import Workbook
@@ -31,7 +31,7 @@ class MAPPAExportService:
             progressoes_ramo = [progressao
                                 for progressao in self.svc.get_progressoes()
                                 if progressao.ramo == ramo]
-            progressoes_ramo.sort(key=lambda progressao: progressao.ordenacao)
+            progressoes_ramo.sort(key=lambda progressao: f'{progressao.codigoCaminho:03d} {progressao.codigoCompetencia:03d} {progressao.ordenacao:03d}')
             self._progressoes_ramo[ramo] = progressoes_ramo
 
         return self._progressoes_ramo[ramo]
