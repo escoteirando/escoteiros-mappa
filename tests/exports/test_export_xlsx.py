@@ -1,5 +1,6 @@
 import os
 import unittest
+from datetime import date
 
 from dotenv import load_dotenv
 
@@ -18,7 +19,11 @@ class TestExportXLSX(unittest.TestCase):
         self.svc.login(self.username, self.password)
         self.esvc = MAPPAExportService(self.svc)
 
-    def test_exporta_progressoes(self):        
+    def test_exporta_progressoes(self):
         wb = self.esvc.export_all('A')
-        
-        wb.save('artifacts//test.xlsx')
+        nome = os.path.join(
+            'artifacts',
+            f'{self.esvc._secoes[0].nome}_{date.today().strftime("%Y-%m-%d")}.xlsx'.
+            replace(' ', '_'))
+
+        wb.save(nome)
