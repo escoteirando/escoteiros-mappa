@@ -9,7 +9,7 @@ packages = [{include = "escoteiros_mappa"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 cache-guiosoft = "^0.0.7"
-requests = "^2.28.2"
+requests = "^2.31.0"
 python-dotenv = "^0.21.1"
 openpyxl = "^3.1.0"
 base-model-guiosoft = "^0.0.3"
